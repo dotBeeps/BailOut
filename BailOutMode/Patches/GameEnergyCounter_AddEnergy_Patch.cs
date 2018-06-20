@@ -12,13 +12,21 @@ class GameEnergyCounter_AddEnergy_Patch
 
         Console.WriteLine("[Bailout] Lethal energy reached, bailing out!");
 
-        AccessTools.Field(typeof(GameEnergyCounter), "_cannotFail").SetValue(__instance, true);
+        try
+        {
+            AccessTools.Field(typeof(GameEnergyCounter), "_cannotFail").SetValue(__instance, true);
 
-        var sceneSetup = UnityEngine.Object.FindObjectOfType<MainGameSceneSetup>();
-        MainGameSceneSetupData setupData = AccessTools.Field(typeof(MainGameSceneSetupData), "_mainGameSceneSetupData").GetValue(sceneSetup) as MainGameSceneSetupData;
-        setupData.gameplayOptions.noEnergy = true;
+            var sceneSetup = UnityEngine.Object.FindObjectOfType<MainGameSceneSetup>();
+            MainGameSceneSetupData setupData = AccessTools.Field(typeof(MainGameSceneSetup), "_mainGameSceneSetupData").GetValue(sceneSetup) as MainGameSceneSetupData;
+            setupData.gameplayOptions.noEnergy = true;
 
-        UnityEngine.Object.FindObjectOfType<GameEnergyUIPanel>().EnableEnergyPanel(false);
+            UnityEngine.Object.FindObjectOfType<GameEnergyUIPanel>().EnableEnergyPanel(false);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         value = 0;
     }
