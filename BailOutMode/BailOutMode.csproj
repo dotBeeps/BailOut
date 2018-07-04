@@ -48,10 +48,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\BailOutMode\BailOutMode\lib\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>lib\Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -84,7 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BailOutModePlugin.cs" />
-    <Compile Include="Patches\GameEnergyCounter_AddEnergy_Patch.cs" />
+    <Compile Include="Helpers\Redirection.cs" />
+    <Compile Include="Patches\GameEnergyPatches.cs" />
+    <Compile Include="Patches\MenuMasterViewControllerPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

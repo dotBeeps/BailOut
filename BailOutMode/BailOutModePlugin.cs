@@ -1,13 +1,16 @@
-﻿using Harmony;
-using IllusionPlugin;
+﻿using IllusionPlugin;
 using System;
 using System.Reflection;
+using BailOutMode.Patches;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BailOutModePlugin : IPlugin
 {
     public string Name => "Bail Out Mode";
     public string Version => "0.0.1";
+
+    public static bool BailedOut = false;
 
     static BailOutModePlugin()
     {
@@ -17,8 +20,8 @@ public class BailOutModePlugin : IPlugin
     public void OnApplicationStart()
     {
         Console.WriteLine("[Bailout] Starting Bailout");
-        var harmony = HarmonyInstance.Create("com.foolishdave.beatsaber.bailout");
-        harmony.PatchAll(Assembly.GetExecutingAssembly());
+        GameEnergyPatches.PatchMethods();
+        MenuMasterViewControllerPatches.PatchMethods();
         Console.WriteLine("[Bailout] Assembly Patched");
     }
 
@@ -46,4 +49,5 @@ public class BailOutModePlugin : IPlugin
     {
 
     }
+
 }
